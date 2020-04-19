@@ -26,6 +26,7 @@ int get_pyramidHeight(void)
  do
  {
     i = get_int("How tall you want the pyramid?\n");
- }while(i<1 || i>8);
- return i;
+ }
+    while(i < 1 || i > 8);
+    return i;
  }
