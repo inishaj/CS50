@@ -72,7 +72,11 @@ void convertToCipher(string text, int key)
         }
         else if(((text[i] >= 'A') && (text[i] <='Z')) ||((text[i] >= 'a') && (text[i] <='z')))
         {
-            text[i] += key;
+            if((text[i] + key) < 127)
+            {
+                text[i] += key;
+            }
+
         }
     }
     printf("ciphertext: %s\n", text);
