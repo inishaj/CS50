@@ -1,0 +1,77 @@
+#include<cs50.h>
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+
+//MACROS
+#define UPPERCASE_A 65
+//#define UPPERCASE_Z 90
+#define LOWERCASE_A 97
+//#define LOWERCASE_Z 122
+#define TOTAL_ALPHABETS 26
+
+//Functions declarations
+bool checkKey(string);
+void convertToCipher(string, string);
+
+//main
+int main(int argc, string argv[])
+{
+    //check if key is legitimate
+    if((argc !=2) || (checkKey(argv[1])))
+    {
+       printf("Usage: ./substitution key\n");
+       return 1;
+    }
+    else if(strlen(argv[1]) != 26)
+    {
+       printf("Key must contain 26 characters.\n");
+       return 1;
+    }
+    else
+    {
+        //printf("Success\n");
+        //prompts user to enter plaintext
+        string plaintext = get_string("plaintext: ");
+        //convert to ciphertext
+        convertToCipher(plaintext, argv[1]);
+
+    }
+
+    return 0;
+}
+
+bool checkKey(string s)
+{
+    int length = strlen(s);
+
+    for(int i = 1; i < length; i++)
+    {
+        if(!isdigit(s[i]))
+        return 0;
+    }
+    return 1;
+}
+void convertToCipher(string text, string key)
+{
+    int pos = 0; //character position in the alphabets
+     int length = strlen(text);
+
+    for(int i = 0; i < length; i++)
+    {
+
+    //check if plain text is upper
+    if((text[i] >= 'A') && (text[i] <='Z'))
+        {
+            pos = text[i] - UPPERCASE_A;
+            text[i] = key[pos];
+        }
+    else if ((text[i] >= 'a') && (text[i] <='z'))
+        {
+            pos = text[i] - LOWERCASE_A;
+            text[i] = key[pos] + 32;
+        }
+    }
+
+    printf("ciphertext: %s\n", text);
+}
