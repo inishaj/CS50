@@ -11,14 +11,19 @@
 #define TOTAL_ALPHABETS 26
 
 //Functions declarations
-bool checkKey(int, string);
+bool checkKey(string);
 void convertToCipher(string, string);
 
 //main
 int main(int argc, string argv[])
 {
+    if(argc !=2)
+    {
+       printf("Usage: ./substitution key\n");
+       return 1;
+    }
     //check if key is legitimate
-    if(checkKey(argc,argv[1]))
+    if(checkKey(argv[1]))
     {
         //printf("key not ok \n");
         return 1;
@@ -38,17 +43,18 @@ int main(int argc, string argv[])
     // check invalid characters in key
     // check duplicate/multiple duplicate characters in key
 
-bool checkKey(int number_arguments, string s) // 1 means key is not OK
+bool checkKey(string s) // 1 means key is not OK
 {
     int length = strlen(s);
     char c;
 
-    if(number_arguments !=2)
+  /*  if(number_arguments !=2)
     {
        printf("Usage: ./substitution key\n");
        return 1;
-    }
-    else if(strlen(s) != 26)
+    }*/
+    //else
+    if(strlen(s) != 26)
     {
        printf("Key must contain 26 characters.\n");
        return 1;
