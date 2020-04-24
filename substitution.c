@@ -20,6 +20,7 @@ int main(int argc, string argv[])
     //check if key is legitimate
     if(checkKey(argc,argv[1]))
     {
+        //printf("key not ok \n");
         return 1;
     }
     else
@@ -54,19 +55,23 @@ bool checkKey(int number_arguments, string s) // 1 means key is not OK
     }
     else
     {
-      for(int i = 1; i < length; i++)
+      for(int i = 0; i < length; i++)
       {
         if(!isalpha(s[i]))
         {
+          //  printf("alphabet problem\n");
             return 1;
         }
         else
         {   //check for duplicate
             c = s[i];
-            for(int j = 0; j < length; j++)
+            for(int j = i+1; j < length; j++)
             {
                if (c == s[j])
-               return 1;
+               {
+                  //printf("duplicate problem, c:%c, text: %c\n", c, s[i]);
+                  return 1;
+               }
             }
         }
 
