@@ -15,13 +15,13 @@ void convertToCipher(string, int);
 
 int main(int argc, string argv[])
 {
-    if(argc != 2)
+    if((argc != 2) || (!checkKey(argv[1])))
     {
         printf("Usage: ./caesar key\n");
         return 1;
     }
     //check if the key is an integar value
-    else if(checkKey(argv[1]))
+    else //if(checkKey(argv[1]))
     {
         //printf("Success\n");
         //printf("%s\n", argv[1]);
@@ -31,11 +31,11 @@ int main(int argc, string argv[])
        //convert to ciphertext
         convertToCipher(plaintext, atoi(argv[1]));
     }
-    else
+   /* else
     {
        printf("Usage: ./caesar key\n");
        return 1;
-    }
+    }*/
 
 
     return 0;
@@ -76,7 +76,7 @@ void convertToCipher(string text, int key)
         }
         //else //if(((text[i] >= 'A') && (text[i] <='Z')) ||((text[i] >= 'a') && (text[i] <='z')))
        // {
-         
+
        // }
     }
     printf("ciphertext: %s\n", text);
