@@ -73,10 +73,10 @@ void convertToCipher(string text, int key)
             //text[i] = LOWERCASE_A + delta - 1;
             text[i] = (((text[i] + key) - LOWERCASE_A) % 26) + LOWERCASE_A;
         }
-        else //if(((text[i] >= 'A') && (text[i] <='Z')) ||((text[i] >= 'a') && (text[i] <='z')))
-        {
-            text[i] += key;
-        }
+        //else //if(((text[i] >= 'A') && (text[i] <='Z')) ||((text[i] >= 'a') && (text[i] <='z')))
+       // {
+         
+       // }
     }
     printf("ciphertext: %s\n", text);
 }
