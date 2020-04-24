@@ -11,22 +11,16 @@
 #define TOTAL_ALPHABETS 26
 
 //Functions declarations
-bool checkKey(string);
+bool checkKey(int, string);
 void convertToCipher(string, string);
 
 //main
 int main(int argc, string argv[])
 {
     //check if key is legitimate
-    if((argc !=2) || (checkKey(argv[1])))
+    if(checkKey(argc,argv[1]))
     {
-       printf("Usage: ./substitution key\n");
-       return 1;
-    }
-    else if(strlen(argv[1]) != 26)
-    {
-       printf("Key must contain 26 characters.\n");
-       return 1;
+        return 1;
     }
     else
     {
@@ -40,22 +34,53 @@ int main(int argc, string argv[])
 
     return 0;
 }
+    // check invalid characters in key
+    // check duplicate/multiple duplicate characters in key
 
-bool checkKey(string s)
+bool checkKey(int number_arguments, string s) // 1 means key is not OK
 {
     int length = strlen(s);
+    char c;
 
-    for(int i = 1; i < length; i++)
+    if(number_arguments !=2)
     {
-        if(!isdigit(s[i]))
-        return 0;
+       printf("Usage: ./substitution key\n");
+       return 1;
     }
-    return 1;
+    else if(strlen(s) != 26)
+    {
+       printf("Key must contain 26 characters.\n");
+       return 1;
+    }
+    else
+    {
+      for(int i = 1; i < length; i++)
+      {
+        if(!isalpha(s[i]))
+        {
+            return 1;
+        }
+        else
+        {   //check for duplicate
+            c = s[i];
+            for(int j = 0; j < length; j++)
+            {
+               if (c == s[j])
+               return 1;
+            }
+        }
+
+      }
+    }
+    return 0;
 }
+
 void convertToCipher(string text, string key)
 {
     int pos = 0; //character position in the alphabets
-     int length = strlen(text);
+    int length = strlen(text);
+
+    //check for case for both text and key
 
     for(int i = 0; i < length; i++)
     {
@@ -64,12 +89,27 @@ void convertToCipher(string text, string key)
     if((text[i] >= 'A') && (text[i] <='Z'))
         {
             pos = text[i] - UPPERCASE_A;
-            text[i] = key[pos];
+            if((key[pos] >= 'A') && (key[pos] <='Z'))
+            {
+                text[i] = key[pos];
+            }
+            else
+            {
+                text[i] = key[pos] - 32;
+            }
+
         }
     else if ((text[i] >= 'a') && (text[i] <='z'))
         {
             pos = text[i] - LOWERCASE_A;
-            text[i] = key[pos] + 32;
+            if((key[pos] >= 'a') && (key[pos] <='z'))
+            {
+                text[i] = key[pos];
+            }
+            else
+            {
+                text[i] = key[pos] + 32;
+            }
         }
     }
 
