@@ -48,12 +48,6 @@ bool checkKey(string s) // 1 means key is not OK
     int length = strlen(s);
     char c;
 
-  /*  if(number_arguments !=2)
-    {
-       printf("Usage: ./substitution key\n");
-       return 1;
-    }*/
-    //else
     if(strlen(s) != 26)
     {
        printf("Key must contain 26 characters.\n");
