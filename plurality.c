@@ -67,18 +67,17 @@ int main(int argc, string argv[])
 bool vote(string name)
 {
     //match the name in the candidate array
-    //printf("name is: %s\n", name);
     for(int i = 0; i < candidate_count; i++)
     {
         if(strcmp(candidates[i].name, name) == 0)
         {
-            //printf("i is: %i\n", i);
             candidates[i].votes += 1;
-            //printf("Match found: %s %i\n",candidates[i].name, candidates[i].votes);
             return true;
         }
 
     }
+    
+    
     return false;
 }
 
@@ -86,6 +85,12 @@ bool vote(string name)
 void print_winner(void)
 {
    int max = 0;
+   
+   for(int i = 0; i < candidate_count; i++)
+    {
+        printf("Candidate name: %s, Candidate votes: %i\n",candidates[i].name, candidates[i].votes);
+    }
+    
    for(int i = 0; i < candidate_count; i++)
     {
         if(candidates[i].votes > max)
