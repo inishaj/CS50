@@ -186,7 +186,7 @@ int find_min(void)
 {
     // find minimum no. of votes in the candidates structure
     int min_votes = (voter_count/2);
-    
+
     for(int i = 0; i < candidate_count; i++)
     {
         if(candidates[i].eliminated == false)
@@ -194,9 +194,9 @@ int find_min(void)
             min_votes = candidates[i].votes;
             break;
         }
-        
+
     }
-    
+
     for(int i = 0; i < candidate_count; i++)
     {
         if((candidates[i].eliminated == false) && (candidates[i].votes < min_votes))
@@ -214,15 +214,19 @@ bool is_tie(int min)
     int count = 0;
     for(int i = 0; i < candidate_count; i++)
     {
-        if(candidates[i].votes == min)
+        if((candidates[i].eliminated == false) && (candidates[i].votes == min))
         {
             count++;
         }
     }
     if(count >= 2)
+    {
         return true;
+    }
     else
+    {
         return false;
+    }
 }
 
 // Eliminate the candidate (or candidiates) in last place
