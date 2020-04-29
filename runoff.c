@@ -142,32 +142,21 @@ bool vote(int voter, int rank, string name)
 // Tabulate votes for non-eliminated candidates
 void tabulate(void)
 {
-    //check just the first preference of all the voters and update the vote count of the candidates
+    //check the  preference of all the voters and update the vote count of the candidates
     //check which candidate has got eliminated-> check 2nd preference candidate for that voter and update respective candidates vote count
     for(int i = 0; i < voter_count; i++)
     {
-        /*if(preferences[i][0] >= 0)
-        {
-          if(candidates[preferences[i][0]].eliminated == false)
-          {
-            candidates[preferences[i][0]].votes += 1;
-          }
-          else
-          {
-             candidates[preferences[i][1]].votes += 1;
-          }
-        }*/
-        for(int j = 0; j < candidate_count; j++)
+       for(int j = 0; j < candidate_count; j++)
         {
             if(preferences[i][j] >= 0)
             {
                 if(candidates[preferences[i][j]].eliminated == false)
-                { 
+                {
                     candidates[preferences[i][j]].votes += 1;
                     break;
                 }
             }
-               
+
         }
 
     }
@@ -197,6 +186,17 @@ int find_min(void)
 {
     // find minimum no. of votes in the candidates structure
     int min_votes = (voter_count/2);
+    
+    for(int i = 0; i < candidate_count; i++)
+    {
+        if(candidates[i].eliminated == false)
+        {
+            min_votes = candidates[i].votes;
+            break;
+        }
+        
+    }
+    
     for(int i = 0; i < candidate_count; i++)
     {
         if((candidates[i].eliminated == false) && (candidates[i].votes < min_votes))
